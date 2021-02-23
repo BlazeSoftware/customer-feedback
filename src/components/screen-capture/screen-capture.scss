@@ -1,0 +1,23 @@
+screen-capture {
+  .o-screen-capture:not(.o-screen-capture--open) {
+    display: none;
+  }
+
+  .c-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .c-toolbar {
+    position: fixed;
+    bottom: 2em;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .c-instruction {
+    margin-bottom: 1em;
+  }
+}

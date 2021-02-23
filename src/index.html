@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <script type="module" src="/build/customer-feedback.esm.js"></script>
+    <script nomodule src="/build/customer-feedback.js"></script>
+  </head>
+  <body>
+    <div style="text-align: center">
+      <img style="width: 500px;" src="images/example.jpeg" />
+      <h1>An example image</h1>
+      <button class="button button--primary" onclick="openFeedback()">Send feedback</button>
+    </div>
+    <customer-feedback></customer-feedback>
+    <script>
+      function openFeedback() {
+        document.querySelector('customer-feedback').show();
+      }
+    </script>
+  </body>
+</html>

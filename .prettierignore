@@ -1,0 +1,14 @@
+node_modules
+__snapshots__
+images/
+dist
+www
+LICENSE
+*.min.*
+*.lock
+*.log
+*.png
+*.d.ts
+*.html
+.*
+
