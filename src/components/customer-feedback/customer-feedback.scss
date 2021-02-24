@@ -3,7 +3,7 @@ customer-feedback {
   --overlay-background: rgba(36, 45, 72, 0.7);
   --font-size: 100%;
   --font-weight: bold;
-  --font-family: avenir, sans-serif;
+  --font-family: inherit;
   --line-height: 1.2;
 
     /* modal */
@@ -263,7 +263,7 @@ customer-feedback {
       box-shadow: var(--button-hover-box-shadow);
     }
 
-    &:focus {
+    &:focus, &--active {
       box-shadow: var(--button-focus-box-shadow);
     }
 

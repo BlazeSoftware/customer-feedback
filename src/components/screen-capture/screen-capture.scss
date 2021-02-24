@@ -7,6 +7,7 @@ screen-capture {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: var(--z-index);
   }
 
   .c-toolbar {
@@ -15,6 +16,7 @@ screen-capture {
     left: 0;
     width: 100%;
     text-align: center;
+    z-index: var(--z-index);
   }
 
   .c-instruction {

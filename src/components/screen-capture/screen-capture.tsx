@@ -28,6 +28,9 @@ export class ScreenCapture {
 
   toolbarRef: HTMLDivElement;
 
+  @State()
+  redact: boolean;
+
   @Method()
   async initialise() {
     this._open = true;
@@ -69,13 +72,18 @@ export class ScreenCapture {
     return { width, height };
   }
 
-  drawSquare(square: { x: number; y: number; width: number; height: number }) {
-    this.ctx.clearRect(square.x, square.y, square.width, square.height);
-    this.ctx.strokeStyle = getComputedStyle(document.querySelector('customer-feedback')).getPropertyValue(
-      '--button-background',
-    );
-    this.ctx.lineWidth = 4;
-    this.ctx.strokeRect(square.x, square.y, square.width, square.height);
+  drawSquare(square: { x: number; y: number; width: number; height: number; redact: boolean }) {
+    if (square.redact) {
+      this.ctx.fillStyle = 'black';
+      this.ctx.fillRect(square.x, square.y, square.width, square.height);
+    } else {
+      this.ctx.clearRect(square.x, square.y, square.width, square.height);
+      this.ctx.strokeStyle = getComputedStyle(document.querySelector('customer-feedback')).getPropertyValue(
+        '--button-background',
+      );
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeRect(square.x, square.y, square.width, square.height);
+    }
   }
 
   drawCanvas() {
@@ -95,6 +103,7 @@ export class ScreenCapture {
       y: this.startY,
       width: this.width,
       height: this.height,
+      redact: this.redact,
     });
   }
 
@@ -126,6 +135,7 @@ export class ScreenCapture {
       y: this.startY,
       width: this.width,
       height: this.height,
+      redact: this.redact,
     });
 
     // clear the sizes
@@ -165,6 +175,18 @@ export class ScreenCapture {
             <div class="c-paragraph">Click and drag to draw squares around problem areas</div>
             <button class="c-button c-button--tertiary" onClick={() => this.close()}>
               Cancel
+            </button>
+            <button
+              class={`c-button c-button--tertiary ${!this.redact && 'c-button--active'}`}
+              onClick={() => (this.redact = false)}
+            >
+              Highlight
+            </button>
+            <button
+              class={`c-button c-button--tertiary ${this.redact && 'c-button--active'}`}
+              onClick={() => (this.redact = true)}
+            >
+              Redact
             </button>
             <button class="c-button c-button--primary" onClick={() => this.screenshot()}>
               Take screenshot
