@@ -73,7 +73,7 @@ export class ScreenCapture {
     this.ctx.clearRect(square.x, square.y, square.width, square.height);
     this.ctx.strokeStyle = getComputedStyle(document.querySelector('customer-feedback')).getPropertyValue(
       '--button-background',
-    );;
+    );
     this.ctx.lineWidth = 4;
     this.ctx.strokeRect(square.x, square.y, square.width, square.height);
   }
@@ -163,9 +163,15 @@ export class ScreenCapture {
         {this._open && (
           <div ref={ref => (this.toolbarRef = ref as HTMLDivElement)} class="c-toolbar">
             <div class="c-paragraph">Click and drag to draw squares around problem areas</div>
-            <button class="c-button c-button--tertiary" onClick={() => this.close()}>Cancel</button>
-            <button class="c-button c-button--primary" onClick={() => this.screenshot()}>Take screenshot</button>
-            <button class="c-button c-button--tertiary" onClick={() => this.reset()}>Reset</button>
+            <button class="c-button c-button--tertiary" onClick={() => this.close()}>
+              Cancel
+            </button>
+            <button class="c-button c-button--primary" onClick={() => this.screenshot()}>
+              Take screenshot
+            </button>
+            <button class="c-button c-button--tertiary" onClick={() => this.reset()}>
+              Reset
+            </button>
           </div>
         )}
       </aside>
