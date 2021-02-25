@@ -17,7 +17,14 @@ npm i @blaze/customer-feedback
 Add the following to the `head` of the document.
 
 ```html
-<script src=""></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@blaze/customer-feedback/dist/customer-feedback/customer-feedback.esm.js"
+  type="module"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@blaze/customer-feedback/dist/customer-feedback/customer-feedback.js"
+  nomodule
+></script>
 ```
 
 Place this web component at the bottom of the body element:
