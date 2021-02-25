@@ -47,7 +47,7 @@ https://stenciljs.com/docs/overview
 Running the code locally is simple. Copy and paste the following into a terminal and press enter.
 
 ```bash
-git@github.com:BlazeSoftware/customer-feedback.git
+git clone git@github.com:BlazeSoftware/customer-feedback.git
 cd customer-feedback
 nvm use
 npm i
