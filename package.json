@@ -36,7 +36,9 @@
     "prettier": "prettier --write './**/*'",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "postpublish": "pinst --enable",
+    "version": "npm run build && git add -A",
+    "postversion": "git push && git push --tags"
   },
   "devDependencies": {
     "@stencil/core": "2.4.0",
