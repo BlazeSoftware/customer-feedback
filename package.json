@@ -2,6 +2,18 @@
   "name": "@blaze/customer-feedback",
   "version": "0.0.1",
   "description": "Customer feedback tool",
+  "author": "Gregory Pratt",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BlazeSoftware/customer-feedback.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BlazeSoftware/customer-feedback/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",
   "es2015": "dist/esm/index.mjs",
@@ -26,7 +38,6 @@
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   },
-  "license": "MIT",
   "devDependencies": {
     "@stencil/core": "2.4.0",
     "@stencil/postcss": "2.0.0",
