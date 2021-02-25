@@ -5,6 +5,7 @@ import cssnano from 'cssnano';
 
 export const config: Config = {
   namespace: 'customer-feedback',
+  buildEs5: true,
   plugins: [
     sass(),
     postcss({

@@ -6,7 +6,7 @@ customer-feedback {
   --font-family: inherit;
   --line-height: 1.2;
 
-    /* modal */
+  /* modal */
   --modal-width: auto;
   --modal-max-width: unset;
   --modal-background: #fff;
@@ -27,7 +27,7 @@ customer-feedback {
   --modal-footer-font-size: 1rem;
   --modal-footer-font-weight: normal;
 
-    /* buttons */
+  /* buttons */
   --button-padding: 0.5em 1em;
   --button-border-radius: 2px;
   --button-font-size: 0.875em;
@@ -81,7 +81,7 @@ customer-feedback {
   --button-tertiary-active-color: #909cc0;
   --button-tertiary-active-box-shadow: none;
 
-    /* description box */
+  /* description box */
   --description-background: transparent;
   --description-color: #fff;
   --description-padding: 1em;
@@ -263,7 +263,8 @@ customer-feedback {
       box-shadow: var(--button-hover-box-shadow);
     }
 
-    &:focus, &--active {
+    &:focus,
+    &--active {
       box-shadow: var(--button-focus-box-shadow);
     }
 

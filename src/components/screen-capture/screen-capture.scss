@@ -14,9 +14,9 @@ screen-capture {
     position: fixed;
     bottom: 2em;
     left: 0;
+    z-index: var(--z-index);
     width: 100%;
     text-align: center;
-    z-index: var(--z-index);
   }
 
   .c-instruction {

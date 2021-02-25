@@ -3,6 +3,7 @@
 `customer-feedback` is a web component that enables you to capture an annotated screenshot and description of a web page.
 
 It can be themed using CSS variables.
+
 ## Getting Started
 
 ### Install the package
@@ -32,7 +33,7 @@ _Under the hood customer-feedback uses it's position in HTML and a high z-index 
 Install the package then add the following code to the start up routine (usually index.js)
 
 ```js
-import { applyPolyfills, defineCustomElements } from "customer-feedback/loader";
+import { applyPolyfills, defineCustomElements } from 'customer-feedback/loader';
 
 applyPolyfills().then(() => {
   defineCustomElements();
@@ -40,6 +41,7 @@ applyPolyfills().then(() => {
 ```
 
 ### Further reading on integrating in other frameworks
+
 https://stenciljs.com/docs/overview
 
 ### Run Locally
