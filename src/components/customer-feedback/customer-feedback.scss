@@ -111,7 +111,7 @@ customer-feedback {
       display: block;
       width: 100%;
       height: 100%;
-      background-color: var(--overlay-background);
+      background: var(--overlay-background);
     }
 
     .o-modal[role='dialog'] {
@@ -124,7 +124,7 @@ customer-feedback {
       max-width: var(--modal-max-width);
       overflow: hidden;
       line-height: var(--line-height);
-      background-color: var(--modal-background);
+      background: var(--modal-background);
       border: 0;
       border-radius: var(--modal-border-radius);
       transform: translate(-50%, -50%);
@@ -144,7 +144,7 @@ customer-feedback {
     .c-modal__header {
       padding: var(--modal-header-padding);
       color: var(--modal-header-color);
-      background-color: var(--modal-header-background);
+      background: var(--modal-header-background);
 
       h2 {
         margin: 0;
@@ -160,7 +160,7 @@ customer-feedback {
       color: var(--modal-body-color);
       font-weight: var(--modal-body-font-weight);
       font-size: var(--modal-body-font-size);
-      background-color: var(--modal-body-background);
+      background: var(--modal-body-background);
     }
 
     .c-modal__footer {
@@ -168,7 +168,7 @@ customer-feedback {
       color: var(--modal-footer-color);
       font-weight: var(--modal-footer-font-weight);
       font-size: var(--modal-footer-font-size);
-      background-color: var(--modal-footer-background);
+      background: var(--modal-footer-background);
     }
   }
 
