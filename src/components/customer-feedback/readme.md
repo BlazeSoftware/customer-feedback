@@ -2,6 +2,13 @@
 
 <!-- Auto Generated Below -->
 
+## Properties
+
+| Property | Attribute | Description | Type     | Default     |
+| -------- | --------- | ----------- | -------- | ----------- |
+| `header` | `header`  |             | `string` | `undefined` |
+| `intro`  | `intro`   |             | `string` | `undefined` |
+
 ## Methods
 
 ### `close() => Promise<void>`
