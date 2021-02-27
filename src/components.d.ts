@@ -8,9 +8,13 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface CustomerFeedback {
         "close": () => Promise<void>;
+        "header": string;
+        "intro": string;
         "show": () => Promise<void>;
     }
     interface FeedbackForm {
+        "header": string;
+        "intro": string;
     }
     interface ScreenCapture {
         "initialise": () => Promise<void>;
@@ -43,8 +47,13 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CustomerFeedback {
+        "header"?: string;
+        "intro"?: string;
     }
     interface FeedbackForm {
+        "header"?: string;
+        "intro"?: string;
+        "onFeedback"?: (event: CustomEvent<any>) => void;
     }
     interface ScreenCapture {
     }

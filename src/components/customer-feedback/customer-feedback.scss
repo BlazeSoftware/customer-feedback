@@ -128,6 +128,10 @@ customer-feedback {
       border: 0;
       border-radius: var(--modal-border-radius);
       transform: translate(-50%, -50%);
+
+      @media (max-width: 60em) {
+        width: 80%;
+      }
     }
 
     .c-modal {
@@ -164,7 +168,6 @@ customer-feedback {
       color: var(--modal-footer-color);
       font-weight: var(--modal-footer-font-weight);
       font-size: var(--modal-footer-font-size);
-      text-align: right;
       background-color: var(--modal-footer-background);
     }
   }
@@ -256,6 +259,11 @@ customer-feedback {
     -webkit-appearance: none;
     appearance: none;
     user-select: none;
+
+    @media (max-width: 60em) {
+      width: 100%;
+      margin: 0.5em 0;
+    }
 
     &:hover {
       color: var(--button-hover-color);

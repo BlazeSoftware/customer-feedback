@@ -1,4 +1,4 @@
-import { Component, h, Method, State } from '@stencil/core';
+import { Component, h, Listen, Method, State } from '@stencil/core';
 import store, { steps } from 'store';
 
 import html2Canvas from 'html2canvas';
@@ -44,6 +44,17 @@ export class ScreenCapture {
     this.drawCanvas();
   }
 
+  @Listen('resize', { target: 'window' })
+  handleWindowResize() {
+    if (this._open) {
+      const canvasSize = this.calculateCanvasSize();
+      this.canvas.width = canvasSize.width;
+      this.canvas.height = canvasSize.height;
+
+      this.drawCanvas();
+    }
+  }
+
   async close() {
     this._open = false;
     store.state.step = steps.feedbackForm;
@@ -52,8 +63,6 @@ export class ScreenCapture {
 
   calculateCanvasSize() {
     const width = Math.max(
-      document.body.scrollWidth,
-      document.documentElement.scrollWidth,
       document.body.offsetWidth,
       document.documentElement.offsetWidth,
       document.body.clientWidth,
