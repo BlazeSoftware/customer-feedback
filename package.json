@@ -32,7 +32,7 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "stylelint": "stylelint \"src/**/*.scss\" --fix",
+    "stylelint": "stylelint \"src/**/*.scss\"",
     "prettier": "prettier --write './**/*'",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
