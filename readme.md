@@ -9,14 +9,7 @@ A framework free and themeable web component that captures an annotated screensh
 Add the following to the `head` of the document.
 
 ```html
-<script
-  src="https://cdn.jsdelivr.net/npm/@blaze/customer-feedback/dist/customer-feedback/customer-feedback.esm.js"
-  type="module"
-></script>
-<script
-  src="https://cdn.jsdelivr.net/npm/@blaze/customer-feedback/dist/customer-feedback/customer-feedback.js"
-  nomodule
-></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@blaze/customer-feedback/dist/customer-feedback/customer-feedback.esm.js"></script>
 ```
 
 Place this web component at the bottom of the body element:
@@ -38,11 +31,7 @@ npm i @blaze/customer-feedback
 then add the following code to the start up routine (usually index.js):
 
 ```js
-import { applyPolyfills, defineCustomElements } from 'customer-feedback/loader';
-
-//...
-
-await applyPolyfills();
+import { defineCustomElements } from '@blaze/customer-feedback/loader';
 defineCustomElements();
 ```
 
@@ -56,10 +45,12 @@ https://stenciljs.com/docs/overview
 
 `header` - the header for the modal
 
-`intro` - the text that appears above the description box
+`instruction` - the text that appears above the description box
+
+`screenshot` - a boolean attribute to enable screen capture
 
 ```html
-<customer-feedback header="..." intro="..."></customer-feedback>
+<customer-feedback header="..." instruction="..." screenshot></customer-feedback>
 ```
 
 ### Methods
@@ -84,12 +75,11 @@ document.querySelector('customer-feedback').addEventListener('feedback', functio
 
 ## Run Locally
 
-Install [`nvm`](https://github.com/nvm-sh/nvm), the rest is simple. Copy and paste the following into a terminal and press enter.
+Copy and paste the following into a terminal and press enter.
 
 ```bash
 git clone git@github.com:BlazeSoftware/customer-feedback.git
 cd customer-feedback
-nvm use
 npm i
 npm start
 ```

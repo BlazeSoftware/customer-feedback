@@ -6,19 +6,25 @@
     <title>Stencil Component Starter</title>
 
     <script type="module" src="/build/customer-feedback.esm.js"></script>
-    <script nomodule src="/build/customer-feedback.js"></script>
   </head>
   <body style="font-family: sans-serif;">
     <div style="text-align: center">
-      <img style="width: 500px; z-index: 2828;" src="images/example.jpeg" />
+      <img style="width: 700px; z-index: 2828;" src="images/example.jpeg" />
       <h1>An example image</h1>
       <button class="button button--primary" onclick="openFeedback()">Send feedback</button>
     </div>
-    <customer-feedback header="Customer Feedback"></customer-feedback>
+
+
+    <customer-feedback header="Something broken?" instruction="Tell us what went wrong..." screenshot></customer-feedback>
+
     <script>
       function openFeedback() {
         document.querySelector('customer-feedback').show();
       }
+
+      document.querySelector('customer-feedback').addEventListener('feedback', (event) => {
+        console.log('Feedback submitted', event.detail);
+      });
     </script>
   </body>
 </html>

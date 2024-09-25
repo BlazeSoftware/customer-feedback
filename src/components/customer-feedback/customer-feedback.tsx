@@ -1,13 +1,16 @@
-import { Component, h, Method, Prop } from '@stencil/core';
+import { Component, Element, h, Method, Prop } from '@stencil/core';
 import store, { steps } from 'store';
 
 @Component({
   tag: 'customer-feedback',
-  styleUrl: 'customer-feedback.scss',
+  styleUrl: 'customer-feedback.css',
+  shadow: true,
 })
 export class CustomerFeedback {
+  @Element() customerFeedback: HTMLElement;
   @Prop() header: string;
-  @Prop() intro: string;
+  @Prop() instruction: string;
+  @Prop() screenshot: boolean;
 
   @Method()
   async show() {
@@ -20,6 +23,9 @@ export class CustomerFeedback {
   }
 
   render() {
-    return [<feedback-form header={this.header} intro={this.intro} />, <screen-capture />];
+    return [
+      <feedback-form header={this.header} instruction={this.instruction} screenshot={this.screenshot} />,
+      <screen-capture />,
+    ];
   }
 }

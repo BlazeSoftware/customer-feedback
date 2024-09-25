@@ -1,11 +1,10 @@
-import { Component, h, Listen, Method, State } from '@stencil/core';
+import { Component, h, Listen, State } from '@stencil/core';
 import store, { steps } from 'store';
 
-import html2Canvas from 'html2canvas';
+import html2Canvas from 'html2canvas-pro';
 
 @Component({
   tag: 'screen-capture',
-  styleUrl: 'screen-capture.scss',
 })
 export class ScreenCapture {
   @State() _open: boolean = false;
@@ -31,7 +30,7 @@ export class ScreenCapture {
   @State()
   redact: boolean;
 
-  @Method()
+  @Listen('screenCapture', { target: 'body' })
   async initialise() {
     this._open = true;
 
@@ -63,6 +62,8 @@ export class ScreenCapture {
 
   calculateCanvasSize() {
     const width = Math.max(
+      document.body.scrollWidth,
+      document.documentElement.scrollWidth,
       document.body.offsetWidth,
       document.documentElement.offsetWidth,
       document.body.clientWidth,
@@ -87,10 +88,10 @@ export class ScreenCapture {
       this.ctx.fillRect(square.x, square.y, square.width, square.height);
     } else {
       this.ctx.clearRect(square.x, square.y, square.width, square.height);
-      this.ctx.strokeStyle = getComputedStyle(document.querySelector('customer-feedback')).getPropertyValue(
-        '--button-background',
-      );
-      this.ctx.lineWidth = 4;
+      const cssVariables = getComputedStyle(document.querySelector('customer-feedback'));
+
+      this.ctx.strokeStyle = cssVariables.getPropertyValue('--highlight-border-color');
+      this.ctx.lineWidth = parseInt(cssVariables.getPropertyValue('--highlight-border-width'));
       this.ctx.strokeRect(square.x, square.y, square.width, square.height);
     }
   }
@@ -118,19 +119,24 @@ export class ScreenCapture {
 
   reset() {
     this.drawings = [];
-    this.drawCanvas();
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   async screenshot() {
+    if (this.drawings.length === 0) {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
     const htmlImage = await html2Canvas(document.documentElement, {
       ignoreElements: el => el === this.toolbarRef,
+      scale: 0.8,
     });
     store.state.screenshot = htmlImage.toDataURL('png');
     store.state.step = steps.feedbackForm;
     this.close();
   }
 
-  handleMouseDown(e) {
+  handleMouseDown(e: MouseEvent) {
     this.startX = e.pageX;
     this.startY = e.pageY;
 
@@ -139,6 +145,11 @@ export class ScreenCapture {
 
   async handleMouseUp() {
     this.isDown = false;
+
+    if (this.width === 0 || this.height === 0) {
+      return;
+    }
+
     this.drawings.push({
       x: this.startX,
       y: this.startY,
@@ -156,7 +167,7 @@ export class ScreenCapture {
     this.isDown = false;
   }
 
-  handleMouseMove(e) {
+  handleMouseMove(e: MouseEvent) {
     if (!this.isDown) {
       return;
     }
@@ -168,11 +179,15 @@ export class ScreenCapture {
     this.drawNewSquare();
   }
 
+  undo() {
+    this.drawings.pop();
+    this.drawCanvas();
+  }
+
   render() {
     return (
-      <aside class={`o-screen-capture ${this._open && 'o-screen-capture--open'}`}>
+      <aside class={`screen-capture ${this._open && 'open'}`}>
         <canvas
-          class="c-canvas"
           ref={el => (this.canvas = el as HTMLCanvasElement)}
           onMouseDown={e => this.handleMouseDown(e)}
           onMouseMove={e => this.handleMouseMove(e)}
@@ -180,28 +195,20 @@ export class ScreenCapture {
           onMouseOut={() => this.handleMouseOut()}
         />
         {this._open && (
-          <div ref={ref => (this.toolbarRef = ref as HTMLDivElement)} class="c-toolbar">
-            <div class="c-paragraph">Click and drag to draw squares around problem areas</div>
-            <button class="c-button c-button--tertiary" onClick={() => this.close()}>
-              Cancel
-            </button>
-            <button
-              class={`c-button c-button--tertiary ${!this.redact && 'c-button--active'}`}
-              onClick={() => (this.redact = false)}
-            >
+          <div ref={ref => (this.toolbarRef = ref as HTMLDivElement)} class="toolbar">
+            <p>Click and drag to draw squares around problem areas</p>
+            <button class={`tertiary ${!this.redact && 'active'}`} onClick={() => (this.redact = false)}>
               Highlight
             </button>
-            <button
-              class={`c-button c-button--tertiary ${this.redact && 'c-button--active'}`}
-              onClick={() => (this.redact = true)}
-            >
+            <button class={`tertiary ${this.redact && 'active'}`} onClick={() => (this.redact = true)}>
               Redact
             </button>
-            <button class="c-button c-button--primary" onClick={() => this.screenshot()}>
-              Take screenshot
+            <button onClick={() => this.screenshot()}>Take screenshot</button>
+            <button class="tertiary" onClick={() => this.undo()}>
+              Undo
             </button>
-            <button class="c-button c-button--tertiary" onClick={() => this.reset()}>
-              Reset
+            <button class="tertiary" onClick={() => this.close()}>
+              Cancel
             </button>
           </div>
         )}

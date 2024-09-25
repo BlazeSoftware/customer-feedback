@@ -9,16 +9,21 @@ export namespace Components {
     interface CustomerFeedback {
         "close": () => Promise<void>;
         "header": string;
-        "intro": string;
+        "instruction": string;
+        "screenshot": boolean;
         "show": () => Promise<void>;
     }
     interface FeedbackForm {
         "header": string;
-        "intro": string;
+        "instruction": string;
+        "screenshot": boolean;
     }
     interface ScreenCapture {
-        "initialise": () => Promise<void>;
     }
+}
+export interface FeedbackFormCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLFeedbackFormElement;
 }
 declare global {
     interface HTMLCustomerFeedbackElement extends Components.CustomerFeedback, HTMLStencilElement {
@@ -27,7 +32,19 @@ declare global {
         prototype: HTMLCustomerFeedbackElement;
         new (): HTMLCustomerFeedbackElement;
     };
+    interface HTMLFeedbackFormElementEventMap {
+        "feedback": any;
+        "screenCapture": any;
+    }
     interface HTMLFeedbackFormElement extends Components.FeedbackForm, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLFeedbackFormElementEventMap>(type: K, listener: (this: HTMLFeedbackFormElement, ev: FeedbackFormCustomEvent<HTMLFeedbackFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLFeedbackFormElementEventMap>(type: K, listener: (this: HTMLFeedbackFormElement, ev: FeedbackFormCustomEvent<HTMLFeedbackFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLFeedbackFormElement: {
         prototype: HTMLFeedbackFormElement;
@@ -48,12 +65,15 @@ declare global {
 declare namespace LocalJSX {
     interface CustomerFeedback {
         "header"?: string;
-        "intro"?: string;
+        "instruction"?: string;
+        "screenshot"?: boolean;
     }
     interface FeedbackForm {
         "header"?: string;
-        "intro"?: string;
-        "onFeedback"?: (event: CustomEvent<any>) => void;
+        "instruction"?: string;
+        "onFeedback"?: (event: FeedbackFormCustomEvent<any>) => void;
+        "onScreenCapture"?: (event: FeedbackFormCustomEvent<any>) => void;
+        "screenshot"?: boolean;
     }
     interface ScreenCapture {
     }

@@ -1,4 +1,1 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-npm run prettier && npm run stylelint && git add .
+npm run build && npm run stylelint
